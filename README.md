@@ -1,0 +1,1 @@
+have client id and client secret in a .env file
