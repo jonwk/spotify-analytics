@@ -22,7 +22,8 @@ app.get(`/`, (req, res) => {
 // generates random string for state
 function generateState(length) {
   var result = "";
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const charactersLength = characters.length;
   for (var i = 0; i < length; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -48,7 +49,7 @@ app.get(`/login`, (req, res) => {
   };
 
   const searchParams = new URLSearchParams(paramsObj);
-  const redirect_url = `https://accounts.spotify.com/authorize?${searchParams}`
+  const redirect_url = `https://accounts.spotify.com/authorize?${searchParams}`;
   res.redirect(redirect_url);
 });
 
@@ -63,11 +64,13 @@ app.get(`/callback`, (req, res) => {
     redirect_uri: REDIRECT_URI,
   }).toString();
 
-  const post_url = `https://accounts.spotify.com/api/token`
+  const post_url = `https://accounts.spotify.com/api/token`;
 
-  const content_type = `application/x-www-form-urlencoded`
+  const content_type = `application/x-www-form-urlencoded`;
 
-  const authorization = `Basic ${new Buffer.from( `${CLIENT_ID}:${CLIENT_SECRET}` ).toString("base64")}`
+  const authorization = `Basic ${new Buffer.from(
+    `${CLIENT_ID}:${CLIENT_SECRET}`
+  ).toString("base64")}`;
 
   axios({
     method: "post",
@@ -80,23 +83,20 @@ app.get(`/callback`, (req, res) => {
   })
     .then((response) => {
       if (response.status === 200) {
+        const { access_token, refresh_token } = response.data;
 
-        const { access_token, token_type } = response.data;
-        const get_url = "https://api.spotify.com/v1/me";
-        const auth = `${token_type} ${access_token}`;
+        const searchParams = new URLSearchParams({
+          access_token: access_token,
+          refresh_token: refresh_token,
+        }).toString();
 
-        axios.get(get_url, {
-            headers: {
-              Authorization: auth,
-            },
-          })
-          .then((response) => {
-            res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`);
-          })
-          .catch((error) => {
-            res.send(error);
-          });
-      } else res.send(response);
+        // redirect to react app
+        res.redirect(`http://localhost:3000/?${searchParams}`);
+        // pass along tokens in query params
+      } else
+        res.redirect(
+          `/?${new URLSearchParams({ error: "invalid_token" }).toString()}`
+        );
     })
     .catch((error) => {
       res.send(error);
