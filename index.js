@@ -83,11 +83,12 @@ app.get(`/callback`, (req, res) => {
   })
     .then((response) => {
       if (response.status === 200) {
-        const { access_token, refresh_token } = response.data;
+        const { access_token, refresh_token, expires_in } = response.data;
 
         const searchParams = new URLSearchParams({
           access_token: access_token,
           refresh_token: refresh_token,
+          expires_in: expires_in,
         }).toString();
 
         // redirect to react app
