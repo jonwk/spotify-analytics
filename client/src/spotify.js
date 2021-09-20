@@ -120,9 +120,23 @@ const getAccessToken = () => {
     // Return access token from query params
     return queryParams[LOCALSTORAGE_KEYS.access_token];
   }
-
   // We should never get here!
   return false;
 };
 
 export const access_token = getAccessToken();
+
+/**
+ * Axios global request headers
+ * https://github.com/axios/axios#global-axios-defaults
+ */
+ axios.defaults.baseURL = 'https://api.spotify.com/v1';
+ axios.defaults.headers['Authorization'] = `Bearer ${access_token}`;
+ axios.defaults.headers['Content-Type'] = 'application/json';
+ 
+ /**
+  * Get current User's Profile
+  * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-current-users-profile
+  *  @returns {Promise}
+  */
+ export const getCurrentUserProfile = () => axios.get('/me')
