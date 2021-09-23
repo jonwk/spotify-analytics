@@ -19,6 +19,7 @@
     "node": "^16.9.1"
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "^1.13.2",
     "concurrently": "^6.2.1",
     "nodemon": "^2.0.12"
   }
