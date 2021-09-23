@@ -12,7 +12,6 @@ import { catchErrors } from "./util";
 import { GlobalStyle } from "./styles";
 import { Login, Profile } from "./pages";
 import styled from "styled-components/macro";
-import "./App.css";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
