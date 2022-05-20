@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 import { access_token, logout, getCurrentUserProfile } from "./spotify";
 import { catchErrors } from "./util";
 import { GlobalStyle } from "./styles";
-import { Login, Profile, TopArtists, TopTracks } from "./pages";
+import { Login, Profile, TopArtists, TopTracks, Playlists } from "./pages";
 import styled from "styled-components/macro";
 
 function ScrollToTop() {
@@ -68,11 +68,11 @@ function App() {
                 <Route path="/top-tracks">
                   <TopTracks />
                 </Route>
+                <Route path="/playlists">
+                  <Playlists />
+                </Route>
                 <Route path="/playlists/:id">
                   <h1>Playlist</h1>
-                </Route>
-                <Route path="/playlists">
-                  <h1>Playlists</h1>
                 </Route>
                 <Route path="/">
                   <Profile />
