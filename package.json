@@ -15,7 +15,7 @@
     "server": "nodemon index.js",
     "client": "cd client && npm start",
     "postinstall": "cd client && npm install",
-    "build": "NODE_ENV=production && cd client/ && npm install && npm run build",
+    "build": "CI=false && NODE_ENV=production && cd client/ && npm install && npm run build",
     "start-server": "node index.js"
   },
   "keywords": [],
