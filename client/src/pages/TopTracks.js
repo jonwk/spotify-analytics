@@ -1,35 +1,37 @@
 import { useState, useEffect } from 'react';
 import { getCurrentUserTopTracks } from '../spotify';
 import { catchErrors } from '../util';
-import { SectionWrapper, TrackList, TimeRangeButtons } from '../components';
+import { SectionWrapper, TrackList, TimeRangeButtons, Loader } from '../components';
 
 const TopTracks = () => {
-  const [topTracks, setTopTracks] = useState(null);
-  const [activeRange, setActiveRange] = useState('short');
+    const [topTracks, setTopTracks] = useState(null);
+    const [activeRange, setActiveRange] = useState('short');
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await getCurrentUserTopTracks(`${activeRange}_term`);
-      setTopTracks(data);
-    };
+    useEffect(() => {
+        const fetchData = async () => {
+            const { data } = await getCurrentUserTopTracks(`${activeRange}_term`);
+            setTopTracks(data);
+        };
 
-    catchErrors(fetchData());
-  }, [activeRange]);
+        catchErrors(fetchData());
+    }, [activeRange]);
 
-  return (
-    <main>
-      <SectionWrapper title="Top Tracks" breadcrumb={true}>
-        <TimeRangeButtons
-          activeRange={activeRange}
-          setActiveRange={setActiveRange}
-        />
+    return (
+        <main>
+            <SectionWrapper title="Top Tracks" breadcrumb={true}>
+                <TimeRangeButtons
+                    activeRange={activeRange}
+                    setActiveRange={setActiveRange}
+                />
 
-        {topTracks && topTracks.items && (
-          <TrackList tracks={topTracks.items} />
-        )}
-      </SectionWrapper>
-    </main>
-  );
+                {topTracks && topTracks.items ? (
+                    <TrackList tracks={topTracks.items} />
+                ) : (
+                    <Loader />
+                )}
+            </SectionWrapper>
+        </main>
+    );
 };
 
 export default TopTracks;

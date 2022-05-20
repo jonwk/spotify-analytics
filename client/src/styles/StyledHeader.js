@@ -40,7 +40,7 @@ const StyledHeader = styled.header`
   }
 
   img.header__img {
-    width: 20%;
+    width: 80%;
     max-width: 250px;
     min-width: 120px;
     margin-right: var(--spacing-lg);
