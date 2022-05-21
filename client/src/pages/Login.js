@@ -27,7 +27,7 @@ const StyledLoginButton = styled.a`
 const LOGIN_URI =
   process.env.NODE_ENV !== "production"
     ? "http://localhost:8888/login"
-    : "https://spotics.vercel.app/login";
+    : "https://spotifics.herokuapp.com/login";
 
 const Login = () => (
   <StyledLoginContainer>
