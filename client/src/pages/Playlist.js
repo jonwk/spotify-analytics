@@ -48,6 +48,7 @@ const Playlist = () => {
         const fetchAudioFeatures = async () => {
             const ids = tracksData.items.map(({ track }) => track.id).join(',');
             const { data } = await getAudioFeaturesForTracks(ids);
+            console.log(data);
             setAudioFeatures(audioFeatures => ([
                 ...audioFeatures ? audioFeatures : [],
                 ...data['audio_features']
@@ -89,7 +90,18 @@ const Playlist = () => {
     }, [tracks, audioFeatures]);
 
     const [sortValue, setSortValue] = useState('');
-    const sortOptions = ['danceability', 'tempo', 'energy'];
+
+    // const sortOptions = ['danceability', 'tempo', 'energy'];
+    const sortOptions = [
+        'acousticness',
+        'danceability',
+        'energy',
+        'instrumentalness',
+        'liveness',
+        'loudness',
+        'speechiness',
+        'tempo',
+        'valence'];
 
     // Sort tracks by audio feature to be used in template
     const sortedTracks = useMemo(() => {
