@@ -6,3 +6,6 @@ export { default as StyledTrackList } from "./StyledTrackList";
 export { default as StyledRangeButtons } from './StyledRangeButtons';
 export { default as StyledDropdown } from './StyledDropdown';
 export { default as theme } from './theme';
+export { default as Main } from './Main';
+export { default as media } from './media';
+export { default as mixins } from './mixins';

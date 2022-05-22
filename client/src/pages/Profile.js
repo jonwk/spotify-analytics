@@ -7,14 +7,17 @@ import {
   getCurrentUserTopTracks,
   getRecentlyPlayed
 } from "../spotify";
-import { StyledHeader } from "../styles";
+import { StyledHeader, StyledTrackList } from "../styles";
 import {
   SectionWrapper,
   ArtistsGrid,
   TrackList,
   PlaylistsGrid,
-  Loader
+  Loader,
+  TrackItem
 } from "../components";
+
+
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
@@ -47,7 +50,6 @@ const Profile = () => {
       console.log(`recentlyPlayed: ${userRecentlyPlayed}`);
 
       const topTracks = await getCurrentUserTopTracks();
-      // setTopTracks(topTracks.data.items.slice(0, 10));
       setTopTracks(topTracks.data);
       console.log(`topTracks: ${topTracks}`);
 
@@ -103,7 +105,11 @@ const Profile = () => {
 
             <SectionWrapper title="Recently Played" seeAllLink="/recently-played">
               {/* {topTracks ? (<TrackList tracks={topTracks.items.slice(0, 10)} />) : (<Loader />)} */}
-              {recentlyPlayed ? (<TrackList tracks={recentlyPlayed.items.slice(0, 10)} />) : (<Loader />)}
+              {/* {recentlyPlayed ? (<TrackList tracks={recentlyPlayed.data.items.slice(0, 10)} />) : (<Loader />)} */}
+              {recentlyPlayed ? (
+                <StyledTrackList>
+                  {recentlyPlayed.items.slice(0, 10).map(({ track }, i) => (<TrackItem track={track} key={i} />))}
+                </StyledTrackList>) : (<Loader />)}
             </SectionWrapper>
 
             <SectionWrapper title="Public Playlists" seeAllLink="/playlists">

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { getRecentlyPlayed } from '../spotify';
 import { catchErrors } from '../util';
-import { SectionWrapper, TrackList, TimeRangeButtons, Loader, RecentlyPlayedList } from '../components';
-
+import { SectionWrapper, Loader, TrackItem } from '../components';
+import { StyledTrackList } from "../styles";
 
 
 const RecentlyPlayed = () => {
@@ -20,10 +20,11 @@ const RecentlyPlayed = () => {
     return (
         <main>
             <SectionWrapper title="Recently Played" breadcrumb={true}>
-                <div>RecentlyPlayed</div>
-
                 {recentlyPlayed && recentlyPlayed.items ? (
-                    <RecentlyPlayedList tracks={recentlyPlayed.items} />
+                    // <RecentlyPlayedList tracks={recentlyPlayed.items} />
+                    <StyledTrackList>
+                        {recentlyPlayed.items.map(({ track }, i) => (<TrackItem track={track} key={i} />))}
+                    </StyledTrackList>
                 ) : (
                     <Loader />
                 )}

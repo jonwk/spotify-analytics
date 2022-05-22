@@ -1,5 +1,7 @@
 import { formatDuration } from "../util";
 import { StyledTrackList } from "../styles";
+import PropTypes from 'prop-types';
+
 
 const TrackList = ({ tracks }) => (
   <div>
@@ -42,4 +44,10 @@ const TrackList = ({ tracks }) => (
     )}
   </div>
 );
+
+TrackList.propTypes = {
+  track: PropTypes.object.isRequired,
+};
+
+
 export default TrackList;
