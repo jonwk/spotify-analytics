@@ -5,3 +5,4 @@ export { default as StyledSection } from "./StyledSection";
 export { default as StyledTrackList } from "./StyledTrackList";
 export { default as StyledRangeButtons } from './StyledRangeButtons';
 export { default as StyledDropdown } from './StyledDropdown';
+export { default as theme } from './theme';

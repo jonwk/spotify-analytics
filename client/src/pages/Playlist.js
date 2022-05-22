@@ -3,8 +3,9 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { catchErrors } from '../util'
 import { getPlaylistById, getAudioFeaturesForTracks } from '../spotify';
-import { TrackList, SectionWrapper, Loader } from '../components';
-import { StyledHeader, StyledDropdown } from '../styles';
+import { TrackList, SectionWrapper, Loader, FeatureChart } from '../components';
+import { StyledHeader, StyledDropdown, theme } from '../styles';
+const { colors, fontSizes, spacing } = theme;
 
 const Playlist = () => {
     const { id } = useParams();
