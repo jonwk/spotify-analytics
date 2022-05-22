@@ -190,3 +190,11 @@ export const getPlaylistById = playlist_id => {
 export const getAudioFeaturesForTracks = ids => {
   return axios.get(`/audio-features?ids=${ids}`);
 };
+
+
+/**
+ * Get Current User's Recently Played Tracks
+ * https://developer.spotify.com/documentation/web-api/reference/player/get-recently-played/
+ */
+
+export const getRecentlyPlayed = () => axios.get('/me/player/recently-played');

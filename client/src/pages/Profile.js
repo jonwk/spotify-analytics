@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { catchErrors } from "../util";
 import {
   getCurrentUserProfile,
   getCurrentUserPlaylists,
   getCurrentUserTopArtists,
   getCurrentUserTopTracks,
+  getRecentlyPlayed
 } from "../spotify";
 import { StyledHeader } from "../styles";
 import {
@@ -20,6 +21,8 @@ const Profile = () => {
   const [playlists, setPlaylists] = useState(null);
   const [topArtists, setTopArtists] = useState(null);
   const [topTracks, setTopTracks] = useState(null);
+  const [recentlyPlayed, setRecentlyPlayed] = useState(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,9 +40,18 @@ const Profile = () => {
       setTopArtists(topArtists.data);
       console.log(`topArtists: ${topArtists}`);
 
+      const userRecentlyPlayed = await getRecentlyPlayed();
+      setRecentlyPlayed(userRecentlyPlayed.data);
+      // console.log(userRecentlyPlayed.data.items.slice(0, 10));
+      // setRecentlyPlayed(topArtists.data);
+      console.log(`recentlyPlayed: ${userRecentlyPlayed}`);
+
       const topTracks = await getCurrentUserTopTracks();
+      // setTopTracks(topTracks.data.items.slice(0, 10));
       setTopTracks(topTracks.data);
-      console.log(`topTracks; ${topTracks}`);
+      console.log(`topTracks: ${topTracks}`);
+
+      // catchErrors(fetchData());
       console.log(`finished fetching data`);
     };
 
@@ -81,23 +93,22 @@ const Profile = () => {
           </StyledHeader>
 
           <main>
-            {topArtists && topTracks && playlists ? (
-              <>
-                <SectionWrapper title="Top artists this month" seeAllLink="/top-artists">
-                  <ArtistsGrid artists={topArtists.items.slice(0, 10)} />
-                </SectionWrapper>
+            <SectionWrapper title="Top artists this month" seeAllLink="/top-artists">
+              {topArtists ? (<ArtistsGrid artists={topArtists.items.slice(0, 10)} />) : (<Loader />)}
+            </SectionWrapper>
 
-                <SectionWrapper title="Top tracks this month" seeAllLink="/top-tracks">
-                  <TrackList tracks={topTracks.items.slice(0, 10)} />
-                </SectionWrapper>
+            <SectionWrapper title="Top tracks this month" seeAllLink="/top-tracks">
+              {topTracks ? (<TrackList tracks={topTracks.items.slice(0, 10)} />) : (<Loader />)}
+            </SectionWrapper>
 
-                <SectionWrapper title="Public Playlists" seeAllLink="/playlists">
-                  <PlaylistsGrid playlists={playlists.items.slice(0, 10)} />
-                </SectionWrapper>
-              </>
-            ) : (
-              <Loader />
-            )}
+            <SectionWrapper title="Recently Played" seeAllLink="/recently-played">
+              {/* {topTracks ? (<TrackList tracks={topTracks.items.slice(0, 10)} />) : (<Loader />)} */}
+              {recentlyPlayed ? (<TrackList tracks={recentlyPlayed.items.slice(0, 10)} />) : (<Loader />)}
+            </SectionWrapper>
+
+            <SectionWrapper title="Public Playlists" seeAllLink="/playlists">
+              {playlists ? (<PlaylistsGrid playlists={playlists.items.slice(0, 10)} />) : (<Loader />)}
+            </SectionWrapper>
           </main>
         </div>
       )}

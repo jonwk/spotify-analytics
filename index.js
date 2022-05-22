@@ -42,9 +42,12 @@ app.get(`/login`, (req, res) => {
   const state = generateState(16);
   res.cookie(stateKey, state);
 
-  const scope = ["user-read-private", "user-read-email", "user-top-read"].join(
-    " "
-  );
+  const scope = [
+    "user-read-private",
+    "user-read-email",
+    "user-read-recently-played",
+    "user-top-read"
+  ].join(" ");
 
   const response_type = "code";
   const paramsObj = {
@@ -121,3 +124,4 @@ app.get("*", (req, res) => {
 app.listen(PORT, () => {
   console.log(`spotify-analytics app listening at http://localhost:${PORT}`);
 });
+
