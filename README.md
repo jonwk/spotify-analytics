@@ -31,5 +31,9 @@
 ## Built with
 
 <p align="center">
-  <img src="" width="100" height="100"/>
+  <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/React-icon.svg.png?raw=true"  height="80"/>
+  <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/express-logo.png?raw=true"  height="80" />
+  <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/spotify-logo.png?raw=true" height="80"/>
+  <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/styled-components-logo.png?raw=true" height="80"/>
+  <img src="https://seeklogo.com/images/N/nodejs-logo-FBE122E377-seeklogo.com.png" height"80"/>
 </p>
