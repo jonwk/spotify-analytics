@@ -1,7 +1,30 @@
-have client id and client secret in a .env file
+# Spotifics - Spotify Analytics
 
-Commited from another account, trying to commit from previous account (jonwk)
+<img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/Readme%20main%20thumbnail.png?raw=true" />
 
-changed output build dir
+## Top Artists
+<p>
+  <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/Top%20Artists%20Expand.png?raw=true" />
+   <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/Top%20Artists%20Expand%20More%20Time.png?raw=true" />
+</p>
 
-<img src="https://github.com/jonwk/spotify-analytics/blob/master/media/Mock%20Demo%20README.png?raw=true" />
+## Top Tracks
+<p>
+  <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/Top%20Tracks%20Expand.png?raw=true" />
+   <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/Top%20Tracks%20Expand%20More%20Time.png?raw=true" />
+</p>
+
+## Recently Played Tracks
+<p>
+  <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/Recently%20Played%20Expand.png?raw=true" />
+</p>
+
+## Public Playlists
+<p>
+  <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/Playlists%20Expand.png?raw=true" />
+</p>
+
+## Notes
+- have client id and client secret in a .env file
+- Commited from another account, trying to commit from previous account (jonwk)
+- changed output build dir
