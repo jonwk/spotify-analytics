@@ -1,7 +1,11 @@
 # Spotifics - Spotify Analytics
+<p align="center">
+  <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/Readme%20main%20thumbnail.png?raw=true" />
+ </p>
+ 
+### A web app that shows your spotify analytics.
 
-<img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/Readme%20main%20thumbnail.png?raw=true" />
-
+# Features
 ## Top Artists
 <p>
   <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/Top%20Artists%20Expand.png?raw=true" />
@@ -24,7 +28,5 @@
   <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/Playlists%20Expand.png?raw=true" />
 </p>
 
-## Notes
-- have client id and client secret in a .env file
-- Commited from another account, trying to commit from previous account (jonwk)
-- changed output build dir
+## Built with
+
