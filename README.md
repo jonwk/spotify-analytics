@@ -3,7 +3,7 @@
   <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/Readme%20main%20thumbnail.png?raw=true" />
  </p>
  
-### A web app that shows your spotify analytics.
+### A web app that shows your spotify analytics. 
 
 # Features
 ## Top Artists
@@ -31,9 +31,19 @@
 ## Built with
 
 <p align="center">
-  <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/React-icon.svg.png?raw=true"  height="80"/>
-  <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/express-logo.png?raw=true"  height="80" />
-  <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/spotify-logo.png?raw=true" height="80"/>
-  <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/styled-components-logo.png?raw=true" height="80"/>
-  <img src="https://seeklogo.com/images/N/nodejs-logo-FBE122E377-seeklogo.com.png" height"80"/>
+  <a href="https://reactjs.org/">
+    <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/logo-React.png?raw=true"  height="80" />
+  </a>
+  <a href="https://nodejs.org/en/">
+    <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/logo-nodejs.png?raw=true"  height="80" />
+  </a>
+  <a href="https://expressjs.com/">
+    <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/logo-express.png?raw=true" height="80"/>
+  </a>
+  <a href="https://developer.spotify.com/documentation/web-api/">
+    <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/logo-spotify.png?raw=true" height="80"/>
+  </a>
+  <a href="https://styled-components.com/">
+    <img src="https://github.com/jonwk/spotify-analytics/blob/master/media/README_Pictures/logo-styled-components.png?raw=true" height="80"/>
+  </a>
 </p>
