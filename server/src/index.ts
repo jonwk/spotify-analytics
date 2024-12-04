@@ -74,53 +74,53 @@ app.get('/login', (context) => {
   return context.redirect(redirectUrl);
 });
 
-// app.get('/callback', async (context) => {
-//   const code = context.req.query('code') || null;
+app.get('/callback', async (context) => {
+  const code = context.req.query('code') || null;
 
-//   if (!code) {
-//     return context.redirect(
-//       `/?${new URLSearchParams({ error: 'missing_code' }).toString()}`
-//     );
-//   }
+  if (!code) {
+    return context.redirect(
+      `/?${new URLSearchParams({ error: 'missing_code' }).toString()}`
+    );
+  }
 
-//   const grantType = 'authorization_code';
-//   const data = new URLSearchParams({
-//     grant_type: grantType,
-//     code: code,
-//     redirect_uri: REDIRECT_URI,
-//   }).toString();
+  const grantType = 'authorization_code';
+  const data = new URLSearchParams({
+    grant_type: grantType,
+    code: code,
+    redirect_uri: REDIRECT_URI,
+  }).toString();
 
-//   const postUrl = 'https://accounts.spotify.com/api/token';
-//   const contentType = 'application/x-www-form-urlencoded';
-//   const authorization = `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`;
+  const postUrl = 'https://accounts.spotify.com/api/token';
+  const contentType = 'application/x-www-form-urlencoded';
+  const authorization = `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`;
 
-//   try {
-//     const response = await axios.post(postUrl, data, {
-//       headers: {
-//         'Content-Type': contentType,
-//         Authorization: authorization,
-//       },
-//     });
+  try {
+    const response = await axios.post(postUrl, data, {
+      headers: {
+        'Content-Type': contentType,
+        Authorization: authorization,
+      },
+    });
 
-//     if (response.status === 200) {
-//       const { access_token, refresh_token, expires_in } = response.data;
+    if (response.status === 200) {
+      const { access_token, refresh_token, expires_in } = response.data;
 
-//       const searchParams = new URLSearchParams({
-//         access_token,
-//         refresh_token,
-//         expires_in,
-//       }).toString();
+      const searchParams = new URLSearchParams({
+        access_token,
+        refresh_token,
+        expires_in,
+      }).toString();
 
-//       return context.redirect(`${FRONTEND_URI}?${searchParams}`);
-//     } else {
-//       return context.redirect(
-//         `/?${new URLSearchParams({ error: 'invalid_token' }).toString()}`
-//       );
-//     }
-//   } catch (error: any) {
-//     return context.text(`Error: ${error.message}`, 500);
-//   }
-// });
+      return context.redirect(`${FRONTEND_URI}?${searchParams}`);
+    } else {
+      return context.redirect(
+        `/?${new URLSearchParams({ error: 'invalid_token' }).toString()}`
+      );
+    }
+  } catch (error: any) {
+    return context.text(`Error: ${error.message}`, 500);
+  }
+});
 
 // // Catch-all route to serve the React app
 // app.get('*', async (context) => {
