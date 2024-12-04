@@ -20,9 +20,14 @@ const PORT = process.env.PORT || 8888;
 //   root: './client/build'
 // }));
 
-// app.get('/', (c) => {
-//   return c.text(`Hello Hono!`)
-// })
+app.get('/', (context) => {
+  const data = {
+    id: `4333`,
+    name: `fvvfdkj`,
+    supp: true,
+  }
+  return context.json(data)
+})
 
 // // Helper function to generate random string for state
 // function generateState(length: number): string {
