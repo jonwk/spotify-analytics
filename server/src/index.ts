@@ -7,7 +7,7 @@ import axios from 'axios';
 import { Buffer } from 'buffer';
 import path from 'path';
 import { readFile } from 'fs/promises';
-
+import { setCookie } from 'hono/cookie'
 dotenv.config()
 
 const app = new Hono()
@@ -40,57 +40,39 @@ app.use('/static/*', serveStatic({
   },
 }))
 
-// // Helper function to generate random string for state
-// function generateState(length: number): string {
-//   const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-//   return Array.from({ length }, () =>
-//     characters.charAt(Math.floor(Math.random() * characters.length))
-//   ).join('');
-// }
+// Helper function to generate random string for state
+function generateState(length: number): string {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  return Array.from({ length }, () =>
+    characters.charAt(Math.floor(Math.random() * characters.length))
+  ).join('');
+}
 
-// const stateKey = 'spotify_auth_state';
+const stateKey = 'spotify_auth_state';
 
-// // Define routes
-// app.get('/', (context) => {
-//   const data = {
-//     id: '4333',
-//     name: 'fvvfdkj',
-//     supp: true,
-//   };
-//   return context.json(data);
-// });
+app.get('/login', (context) => {
+  const state = generateState(16);
+  setCookie(context, stateKey, state);
 
-// app.get('/login', (context) => {
-//   const state = generateState(16);
-//   context.cookie(stateKey, state);
+  const scope = [
+    'user-read-private',
+    'user-read-email',
+    'user-read-recently-played',
+    'user-top-read',
+  ].join(' ');
 
-//   const scope = [
-//     'user-read-private',
-//     'user-read-email',
-//     'user-read-recently-played',
-//     'user-top-read',
-//   ].join(' ');
+  const paramsObj = {
+    response_type: 'code',
+    client_id: CLIENT_ID,
+    redirect_uri: REDIRECT_URI,
+    state: state,
+    scope: scope,
+  };
 
-//   const paramsObj = {
-//     response_type: 'code',
-//     client_id: CLIENT_ID,
-//     redirect_uri: REDIRECT_URI,
-//     state: state,
-//     scope: scope,
-//   };
-
-//   //   const paramsObj: {
-//   //     response_type: string;
-//   //     client_id: string | undefined;
-//   //     redirect_uri: string | undefined;
-//   //     state: string;
-//   //     scope: string;
-//   // }
-
-//   const searchParams = new URLSearchParams(paramsObj);
-//   const redirectUrl = `https://accounts.spotify.com/authorize?${searchParams}`;
-//   return context.redirect(redirectUrl);
-// });
+  const searchParams = new URLSearchParams(paramsObj);
+  const redirectUrl = `https://accounts.spotify.com/authorize?${searchParams}`;
+  return context.redirect(redirectUrl);
+});
 
 // app.get('/callback', async (context) => {
 //   const code = context.req.query('code') || null;
