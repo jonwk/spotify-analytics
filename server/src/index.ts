@@ -2,7 +2,6 @@ import { Hono } from 'hono';
 import { serve } from '@hono/node-server'
 import { serveStatic } from 'hono/serve-static';
 import { URLSearchParams } from 'url';
-import axios from 'axios';
 import { Buffer } from 'buffer';
 import path from 'path';
 import { readFile } from 'fs/promises';
@@ -90,20 +89,24 @@ app.get('/callback', async (context) => {
   const authorization = `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`;
 
   try {
-    const response = await axios.post(postUrl, data, {
+
+    const response = await fetch(postUrl, {
+      method: 'POST',
       headers: {
         'Content-Type': contentType,
         Authorization: authorization,
       },
+      body: data.toString(),
     });
 
-    if (response.status === 200) {
-      const { access_token, refresh_token, expires_in } = response.data;
+    if (response.ok || response.status === 200) {
+      const responseData = await response.json();
+      const { access_token, refresh_token, expires_in } = responseData;
 
       const searchParams = new URLSearchParams({
         access_token,
         refresh_token,
-        expires_in,
+        expires_in: expires_in.toString(),
       }).toString();
 
       return context.redirect(`${FRONTEND_URI}?${searchParams}`);
