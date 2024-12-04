@@ -122,12 +122,18 @@ app.get('/callback', async (context) => {
   }
 });
 
-// // Catch-all route to serve the React app
-// app.get('*', async (context) => {
-//   return serveStatic({ root: './client/build', path: 'index.html' })(context);
-// });
+// Catch-all route to serve the React app
+app.get('*', async (context) => {
+  const indexFilePath = path.resolve('../../client/build', 'index.html');
+  try {
+    const content = await readFile(indexFilePath, 'utf-8');
+    return context.html(content);
+  } catch (err) {
+    return context.text('Index file not found', 404);
+  }
+});
 
-// // Start the server
+// Start the server
 // app.listen(PORT, () => {
 //   console.log(`Hono Spotify app listening at http://localhost:${PORT}`);
 // });
