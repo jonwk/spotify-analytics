@@ -2,13 +2,12 @@ import { Hono } from 'hono';
 import { serve } from '@hono/node-server'
 import { serveStatic } from 'hono/serve-static';
 import { URLSearchParams } from 'url';
-import dotenv from 'dotenv';
 import axios from 'axios';
 import { Buffer } from 'buffer';
 import path from 'path';
 import { readFile } from 'fs/promises';
 import { setCookie } from 'hono/cookie'
-dotenv.config()
+import 'dotenv/config'
 
 const app = new Hono()
 
@@ -19,12 +18,8 @@ const FRONTEND_URI = process.env.FRONTEND_URI;
 const PORT = process.env.PORT || 8888;
 
 app.get('/', (context) => {
-  const data = {
-    id: `4333`,
-    name: `fvvfdkj`,
-    supp: true,
-  }
-  return context.json(data)
+  console.log(`Hono app listening at http://localhost:${PORT}`);
+  return context.text(`Hono app listening at http://localhost:${PORT}`);
 })
 
 app.use('/static/*', serveStatic({
@@ -132,11 +127,6 @@ app.get('*', async (context) => {
     return context.text('Index file not found', 404);
   }
 });
-
-// Start the server
-// app.listen(PORT, () => {
-//   console.log(`Hono Spotify app listening at http://localhost:${PORT}`);
-// });
 
 serve({
   fetch: app.fetch,
