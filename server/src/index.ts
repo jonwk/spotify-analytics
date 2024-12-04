@@ -5,6 +5,8 @@ import { URLSearchParams } from 'url';
 import dotenv from 'dotenv';
 import axios from 'axios';
 import { Buffer } from 'buffer';
+import path from 'path';
+import { readFile } from 'fs/promises';
 
 dotenv.config()
 
@@ -16,10 +18,6 @@ const REDIRECT_URI = process.env.REDIRECT_URI;
 const FRONTEND_URI = process.env.FRONTEND_URI;
 const PORT = process.env.PORT || 8888;
 
-// app.use('/static/*', serveStatic({
-//   root: './client/build'
-// }));
-
 app.get('/', (context) => {
   const data = {
     id: `4333`,
@@ -28,6 +26,19 @@ app.get('/', (context) => {
   }
   return context.json(data)
 })
+
+app.use('/static/*', serveStatic({
+  root: '../../client/build',
+  getContent: async (filePath) => {
+    try {
+      const absolutePath = path.resolve('../../client/build', filePath);
+      const content = await readFile(absolutePath);
+      return content;
+    } catch {
+      return null;
+    }
+  },
+}))
 
 // // Helper function to generate random string for state
 // function generateState(length: number): string {
