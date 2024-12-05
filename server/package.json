@@ -5,6 +5,7 @@
     "dev": "tsx watch src/index.ts"
   },
   "dependencies": {
+    "@hono/eslint-config": "^1.0.2",
     "@hono/node-server": "^1.13.7",
     "dotenv": "^16.4.7",
     "hono": "^4.6.12"
