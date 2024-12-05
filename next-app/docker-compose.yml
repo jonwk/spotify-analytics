@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-  next-app:
+  spotifics:
     platform: linux/arm64
     build:
       context: .
