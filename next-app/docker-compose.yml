@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  next-app:
+    platform: linux/arm64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules # Prevents overwriting node_modules with your local machine's version
+    environment:
+      NODE_ENV: development
+    command: npm run dev
