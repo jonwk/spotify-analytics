@@ -10,3 +10,10 @@ services:
       - ./server/.env
     volumes:
       - ./server/src:/app/src
+  
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
