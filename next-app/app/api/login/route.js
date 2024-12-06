@@ -12,7 +12,7 @@ function generateState(length) {
   ).join('');
 }
 
-export async function GET(request, response) {
+export async function GET(request) {
   const cookieStore = await cookies()
   const state = generateState(16);
 
