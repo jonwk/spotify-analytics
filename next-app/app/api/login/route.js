@@ -1,5 +1,4 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import { NextResponse, NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
 
 const CLIENT_ID = process.env.CLIENT_ID;
@@ -16,7 +15,7 @@ function generateState(length) {
 export async function GET(request, response) {
   const cookieStore = await cookies()
   const state = generateState(16);
-  
+
   cookieStore.set(stateKey, state);
 
   const scope = [
