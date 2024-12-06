@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8888:8888"
+    env_file:
+      - ./server/.env
+    volumes:
+      - ./server/src:/app/src
