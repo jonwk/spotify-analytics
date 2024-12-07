@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from 'styled-components/macro'
 
 const StyledGrid = styled.ul`
   list-style: none;
@@ -74,6 +74,6 @@ const StyledGrid = styled.ul`
     font-size: var(--fz-sm);
     color: var(--light-grey);
   }
-`;
+`
 
-export default StyledGrid;
+export default StyledGrid

@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from 'styled-components/macro'
 
 const StyledSection = styled.section`
   &:first-of-type {
@@ -60,6 +60,6 @@ const StyledSection = styled.section`
     letter-spacing: 0.1em;
     padding-bottom: 2px;
   }
-`;
+`
 
-export default StyledSection;
+export default StyledSection

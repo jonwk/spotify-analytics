@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from 'styled-components/macro'
 
 const StyledRangeButtons = styled.ul`
   display: flex;
@@ -34,6 +34,6 @@ const StyledRangeButtons = styled.ul`
       background-color: var(--green);
     }
   }
-`;
+`
 
-export default StyledRangeButtons;
+export default StyledRangeButtons

@@ -1,6 +1,7 @@
-import { createGlobalStyle } from "styled-components/macro";
-import fonts from "./fonts";
-import variables from "./variables";
+import { createGlobalStyle } from 'styled-components/macro'
+
+import fonts from './fonts'
+import variables from './variables'
 
 const GlobalStyle = createGlobalStyle`
   ${fonts};
@@ -116,6 +117,6 @@ const GlobalStyle = createGlobalStyle`
     text-align: center;
     padding: var(--spacing-xxl);
   }
-`;
+`
 
-export default GlobalStyle;
+export default GlobalStyle
