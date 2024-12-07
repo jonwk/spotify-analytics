@@ -4,8 +4,7 @@ import axios from 'axios';
 import { catchErrors } from '../util'
 import { getPlaylistById } from '../spotify';
 import { TrackList, SectionWrapper, Loader } from '../components';
-import { StyledHeader, StyledDropdown, theme } from '../styles';
-// const { colors, fontSizes, spacing } = theme;
+import { StyledHeader } from '../styles';
 
 const Playlist = () => {
     const { id } = useParams();
