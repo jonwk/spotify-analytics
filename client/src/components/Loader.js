@@ -1,4 +1,5 @@
-import styled, { keyframes } from 'styled-components/macro';
+import React from 'react'
+import styled, { keyframes } from 'styled-components/macro'
 
 const dance = keyframes`
   from {
@@ -7,7 +8,7 @@ const dance = keyframes`
   to {
     height: 100%;
   }
-`;
+`
 
 const StyledLoader = styled.div`
   display: flex;
@@ -30,7 +31,7 @@ const StyledLoader = styled.div`
     left: 0;
     right: 0;
   }
-`;
+`
 
 const StyledBar = styled.div`
   width: 10px;
@@ -44,18 +45,18 @@ const StyledBar = styled.div`
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-delay: ${props => props.delay || '0ms'};
-`;
+`
 
 const Loader = () => (
-    <StyledLoader>
-        <div className="bars">
-            <StyledBar delay="250ms" />
-            <StyledBar delay="715ms" />
-            <StyledBar delay="475ms" />
-            <StyledBar delay="25ms" />
-            <StyledBar delay="190ms" />
-        </div>
-    </StyledLoader>
-);
+  <StyledLoader>
+    <div className="bars">
+      <StyledBar delay="250ms" />
+      <StyledBar delay="715ms" />
+      <StyledBar delay="475ms" />
+      <StyledBar delay="25ms" />
+      <StyledBar delay="190ms" />
+    </div>
+  </StyledLoader>
+)
 
-export default Loader;
+export default Loader

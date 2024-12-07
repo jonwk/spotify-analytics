@@ -1,5 +1,7 @@
-import { Link } from "react-router-dom";
-import { StyledSection } from "../styles";
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+import { StyledSection } from '../styles'
 
 const SectionWrapper = ({ children, title, seeAllLink, breadcrumb }) => (
   <StyledSection>
@@ -32,6 +34,6 @@ const SectionWrapper = ({ children, title, seeAllLink, breadcrumb }) => (
       {children}
     </div>
   </StyledSection>
-);
+)
 
-export default SectionWrapper;
+export default SectionWrapper

@@ -1,17 +1,19 @@
-import { formatDuration } from "../util";
-import { StyledTrackList } from "../styles";
-import PropTypes from 'prop-types';
+import React from 'react'
+import PropTypes from 'prop-types'
+
+import { StyledTrackList } from '../styles'
+import { formatDuration } from '../util'
 
 
 const TrackList = ({ tracks }) => (
   <div>
-    {tracks && tracks.length ? (
+    {tracks && tracks.length > 0 ? (
       <StyledTrackList>
-        {tracks.map((track, i) => (
-          <li className="track__item" key={i}>
-            <div className="track__item__num">{i + 1}</div>
+        {tracks.map((track, index) => (
+          <li className="track__item" key={index}>
+            <div className="track__item__num">{index + 1}</div>
             <div className="track__item__title-group">
-              {track.album.images.length && track.album.images[2] && (
+              {track.album.images && track.album.images.length > 0 && track.album.images[2] && (
                 <div className="track__item__img">
                   <img src={track.album.images[2].url} alt={track.name} />
                 </div>
@@ -21,10 +23,10 @@ const TrackList = ({ tracks }) => (
                   {track.name}
                 </div>
                 <div className="track__item__artist overflow-ellipsis">
-                  {track.artists.map((artist, i) => (
-                    <span key={i}>
+                  {track.artists.map((artist, index) => (
+                    <span key={index}>
                       {artist.name}
-                      {i !== track.artists.length - 1 && ", "}
+                      {index !== track.artists.length - 1 && ', '}
                     </span>
                   ))}
                 </div>
@@ -43,11 +45,11 @@ const TrackList = ({ tracks }) => (
       <p className="empty-notice">No tracks available</p>
     )}
   </div>
-);
+)
 
 TrackList.propTypes = {
   track: PropTypes.object.isRequired,
-};
+}
 
 
-export default TrackList;
+export default TrackList
