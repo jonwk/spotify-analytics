@@ -1,11 +1,11 @@
 declare global {
   namespace NodeJS {
     interface ProcessEnv {
-      CLIENT_SECRET: string;
-      CLIENT_ID: string;
-      FRONTEND_URI: string;
-      REDIRECT_URI: string;
-      PORT?: number;
+      CLIENT_SECRET: string
+      CLIENT_ID: string
+      FRONTEND_URI: string
+      REDIRECT_URI: string
+      PORT?: number
     }
   }
 }
