@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from 'styled-components/macro'
 
 const StyledDropdown = styled.div`
   position: absolute;
@@ -33,6 +33,6 @@ const StyledDropdown = styled.div`
     font-family: inherit;
     padding: var(--spacing-xs) var(--spacing-xl) var(--spacing-xs) var(--spacing-sm);
   }
-`;
+`
 
-export default StyledDropdown;
+export default StyledDropdown

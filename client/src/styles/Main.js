@@ -1,5 +1,6 @@
-import styled from 'styled-components/macro';
-import media from './media';
+import styled from 'styled-components/macro'
+
+import media from './media'
 
 const Main = styled.main`
   width: 100%;
@@ -21,6 +22,6 @@ const Main = styled.main`
       text-align: center;
     `};
   }
-`;
+`
 
-export default Main;
+export default Main

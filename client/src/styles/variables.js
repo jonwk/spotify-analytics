@@ -1,4 +1,4 @@
-import { css } from 'styled-components/macro';
+import { css } from 'styled-components/macro'
 
 const variables = css`
   :root {
@@ -33,6 +33,6 @@ const variables = css`
 
     --site-max-width: 1300px;
   }
-`;
+`
 
-export default variables;
+export default variables

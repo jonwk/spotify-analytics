@@ -1,4 +1,4 @@
-import { css } from "styled-components/macro";
+import { css } from 'styled-components/macro'
 
 const fonts = css`
   @font-face {
@@ -24,6 +24,6 @@ const fonts = css`
     font-weight: 900;
     font-style: normal;
   }
-`;
+`
 
-export default fonts;
+export default fonts

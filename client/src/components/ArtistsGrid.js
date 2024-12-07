@@ -1,11 +1,14 @@
-import { StyledGrid } from "../styles";
+
+import React from 'react'
+
+import { StyledGrid } from '../styles'
 
 const ArtistsGrid = ({ artists }) => (
-    <div>
-    {artists && artists.length ? (
+  <div>
+    {artists && artists.length > 0 ? (
       <StyledGrid type="artist">
-        {artists.map((artist, i) => (
-          <li className="grid__item" key={i}>
+        {artists.map((artist, index) => (
+          <li className="grid__item" key={index}>
             <div className="grid__item__inner">
               {artist.images[0] && (
                 <div className="grid__item__img">
@@ -24,6 +27,6 @@ const ArtistsGrid = ({ artists }) => (
       <p className="empty-notice">No artists available</p>
     )}
   </div>
-);
+)
 
-export default ArtistsGrid;
+export default ArtistsGrid

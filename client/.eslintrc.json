@@ -1,0 +1,118 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es2021": true,
+    "jest": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "react-app",
+    "react-app/jest",
+    "plugin:unicorn/recommended",
+    "plugin:flowtype/recommended"
+  ],
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "simple-import-sort",
+    "eslint-plugin-flowtype"
+  ],
+  "root": true,
+  "rules": {
+    "semi": [
+      "error",
+      "never"
+    ],
+    "quotes": [
+      "error",
+      "single",
+      {
+        "avoidEscape": true
+      }
+    ],
+    "no-multi-spaces": "error",
+    "comma-spacing": [
+      "error",
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "simple-import-sort/imports": [
+      "error",
+      {
+        "groups": [
+          [
+            "^react",
+            "^@?\\w"
+          ],
+          [
+            "^@?\\w"
+          ],
+          [
+            "^"
+          ],
+          [
+            "^src//"
+          ],
+          [
+            "^\\."
+          ]
+        ]
+      }
+    ],
+    "simple-import-sort/exports": "error",
+    "unicorn/filename-case": [
+      "error",
+      {
+        "cases": {
+          "camelCase": true,
+          "pascalCase": true
+        }
+      }
+    ],
+    "unicorn/prevent-abbreviations": [
+      "error",
+      {
+        "allowList": {
+          "args": true,
+          "props": true,
+          "Props": true,
+          "prop": true,
+          "ref": true,
+          "Ref": true,
+          "temp": true
+        }
+      }
+    ],
+    "unicorn/no-array-reduce": "off",
+    "unicorn/no-array-for-each": "off",
+    "react/prop-types": "off",
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function"
+      }
+    ]
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

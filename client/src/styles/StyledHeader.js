@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from 'styled-components/macro'
 
 const StyledHeader = styled.header`
   display: flex;
@@ -91,6 +91,6 @@ const StyledHeader = styled.header`
       }
     }
   }
-`;
+`
 
-export default StyledHeader;
+export default StyledHeader

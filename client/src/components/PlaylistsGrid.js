@@ -1,17 +1,19 @@
-import { Link } from "react-router-dom";
-import { StyledGrid } from "../styles";
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+import { StyledGrid } from '../styles'
 
 const PlaylistsGrid = ({ playlists }) => (
   <div>
-    {playlists && playlists.length ? (
+    {playlists && playlists.length > 0 ? (
       <StyledGrid>
-        {playlists.map((playlist, i) => (
-          <li className="grid__item" key={i}>
+        {playlists.map((playlist, index) => (
+          <li className="grid__item" key={index}>
             <Link
               className="grid__item__inner"
               to={`/playlists/${playlist.id}`}
             >
-              {playlist.images.length && playlist.images[0] && (
+              {playlist.images && playlist.images.length > 0 && playlist.images[0] && (
                 <div className="grid__item__img">
                   <img src={playlist.images[0].url} alt={playlist.name} />
                 </div>
@@ -28,6 +30,6 @@ const PlaylistsGrid = ({ playlists }) => (
       <p className="empty-notice">No playlists available</p>
     )}
   </div>
-);
+)
 
-export default PlaylistsGrid;
+export default PlaylistsGrid

@@ -1,4 +1,5 @@
-import styled from "styled-components/macro";
+import React from 'react'
+import styled from 'styled-components/macro'
 
 const StyledLoginContainer = styled.main`
   display: flex;
@@ -6,7 +7,7 @@ const StyledLoginContainer = styled.main`
   justify-content: center;
   align-items: center;
   height: 100vh;
-`;
+`
 
 const StyledLoginButton = styled.a`
   display: inline-block;
@@ -22,17 +23,17 @@ const StyledLoginButton = styled.a`
     text-decoration: none;
     filter: brightness(1.1);
   }
-`;
+`
 
 const LOGIN_URI =
-  process.env.NODE_ENV !== "production"
-    ? "http://localhost:8888/login"
-    : "https://spotifics.herokuapp.com/login";
+  process.env.NODE_ENV === 'production'
+    ? 'https://spotifics.herokuapp.com/login'
+    : 'http://localhost:8888/login'
 
 const Login = () => (
   <StyledLoginContainer>
     <StyledLoginButton href={LOGIN_URI}>Log in to Spotify</StyledLoginButton>
   </StyledLoginContainer>
-);
+)
 
-export default Login;
+export default Login
