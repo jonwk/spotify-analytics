@@ -3,12 +3,10 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   useLocation,
 } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { access_token, logout, getCurrentUserProfile } from "./spotify";
-import { catchErrors } from "./util";
+import { access_token, logout } from "./spotify";
 import { GlobalStyle } from "./styles";
 import { Login, Profile, TopArtists, TopTracks, Playlists, Playlist, RecentlyPlayed } from "./pages";
 import styled from "styled-components/macro";
@@ -45,8 +43,6 @@ function App() {
   useEffect(() => {
     setToken(access_token);
   }, []);
-
-  // Replacing with react router
 
   return (
     <div className="App">
