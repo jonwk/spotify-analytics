@@ -3,13 +3,13 @@
  * @param {function} fn an async function
  * @returns {function}
  */
-export const catchErrors = (fn) => {
+export const catchErrors = (function_) => {
   return function (...args) {
-    return fn(...args).catch((err) => {
-      console.error(err);
-    });
-  };
-};
+    return function_(...args).catch((error) => {
+      console.error(error)
+    })
+  }
+}
 
 /**
  * Format milliseconds to time duration
@@ -18,7 +18,7 @@ export const catchErrors = (fn) => {
  * @example 216699 -> '3:36'
  */
 export const formatDuration = (ms) => {
-  const minutes = Math.floor(ms / 60000);
-  const seconds = Math.floor((ms % 60000) / 1000);
-  return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-};
+  const minutes = Math.floor(ms / 60_000)
+  const seconds = Math.floor((ms % 60_000) / 1000)
+  return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+}

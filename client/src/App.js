@@ -1,24 +1,25 @@
-import React from "react";
+import React from 'react'
+import { useEffect, useState } from 'react'
 import {
   BrowserRouter as Router,
-  Switch,
   Route,
+  Switch,
   useLocation,
-} from "react-router-dom";
-import { useState, useEffect } from "react";
-import { access_token, logout } from "./spotify";
-import { GlobalStyle } from "./styles";
-import { Login, Profile, TopArtists, TopTracks, Playlists, Playlist, RecentlyPlayed } from "./pages";
-import styled from "styled-components/macro";
+} from 'react-router-dom'
+import styled from 'styled-components/macro'
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
+import { Login, Playlist, Playlists, Profile, RecentlyPlayed, TopArtists, TopTracks } from './pages'
+import { access_token, logout } from './spotify'
+import { GlobalStyle } from './styles'
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation()
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    window.scrollTo(0, 0)
+  }, [pathname])
 
-  return null;
+  return null
 }
 
 const StyledLogoutButton = styled.button`
@@ -35,23 +36,21 @@ const StyledLogoutButton = styled.button`
   @media (min-width: 768px) {
     right: var(--spacing-lg);
   }
-`;
+`
 
-function App() {
-  const [token, setToken] = useState(null);
+const App = () => {
+  const [token, setToken] = useState()
 
   useEffect(() => {
-    setToken(access_token);
-  }, []);
+    setToken(access_token)
+  }, [])
 
   return (
     <div className="App">
       <GlobalStyle />
 
       <header className="App-header">
-        {!token ? (
-          <Login />
-        ) : (
+        {token ? (
           <div>
             <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
             <Router>
@@ -79,10 +78,12 @@ function App() {
               </Switch>
             </Router>
           </div>
+        ) : (
+          <Login />
         )}
       </header>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
