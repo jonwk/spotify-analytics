@@ -29,32 +29,21 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log('fetching data')
 
       const userProfile = await getCurrentUserProfile()
-      console.log(`userProfile: ${userProfile.data}`)
       setProfile(userProfile.data)
 
       const userPlaylists = await getCurrentUserPlaylists()
       setPlaylists(userPlaylists.data)
-      console.log(`userPlaylists: ${userPlaylists.data}`)
 
       const topArtists = await getCurrentUserTopArtists()
       setTopArtists(topArtists.data)
-      console.log(`topArtists: ${topArtists}`)
 
       const userRecentlyPlayed = await getRecentlyPlayed()
       setRecentlyPlayed(userRecentlyPlayed.data)
-      // console.log(userRecentlyPlayed.data.items.slice(0, 10));
-      // setRecentlyPlayed(topArtists.data);
-      console.log(`recentlyPlayed: ${userRecentlyPlayed}`)
-
+      
       const topTracks = await getCurrentUserTopTracks()
       setTopTracks(topTracks.data)
-      console.log(`topTracks: ${topTracks}`)
-
-      // catchErrors(fetchData());
-      console.log('finished fetching data')
     }
 
     catchErrors(fetchData())
