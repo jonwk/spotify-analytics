@@ -12,7 +12,6 @@ const Playlist = () => {
     const [playlist, setPlaylist] = useState(null);
     const [tracksData, setTracksData] = useState(null);
     const [tracks, setTracks] = useState(null);
-    const [audioFeatures, setAudioFeatures] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
