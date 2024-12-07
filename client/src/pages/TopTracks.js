@@ -1,20 +1,21 @@
-import { useState, useEffect } from 'react';
-import { getCurrentUserTopTracks } from '../spotify';
-import { catchErrors } from '../util';
-import { SectionWrapper, TrackList, TimeRangeButtons, Loader } from '../components';
+import React, { useEffect, useState } from 'react'
+
+import { Loader, SectionWrapper, TimeRangeButtons, TrackList } from '../components'
+import { getCurrentUserTopTracks } from '../spotify'
+import { catchErrors } from '../util'
 
 const TopTracks = () => {
-    const [topTracks, setTopTracks] = useState(null);
-    const [activeRange, setActiveRange] = useState('short');
+    const [topTracks, setTopTracks] = useState()
+    const [activeRange, setActiveRange] = useState('short')
 
     useEffect(() => {
         const fetchData = async () => {
-            const { data } = await getCurrentUserTopTracks(`${activeRange}_term`);
-            setTopTracks(data);
-        };
+            const { data } = await getCurrentUserTopTracks(`${activeRange}_term`)
+            setTopTracks(data)
+        }
 
-        catchErrors(fetchData());
-    }, [activeRange]);
+        catchErrors(fetchData())
+    }, [activeRange])
 
     return (
         <main>
@@ -31,7 +32,7 @@ const TopTracks = () => {
                 )}
             </SectionWrapper>
         </main>
-    );
-};
+    )
+}
 
-export default TopTracks;
+export default TopTracks

@@ -1,64 +1,64 @@
-import React, { useEffect, useState } from "react";
-import { catchErrors } from "../util";
+import React, { useEffect, useState } from 'react'
+
 import {
-  getCurrentUserProfile,
+  ArtistsGrid,
+  Loader,
+  PlaylistsGrid,
+  SectionWrapper,
+  TrackItem,
+  TrackList } from '../components'
+import {
   getCurrentUserPlaylists,
+  getCurrentUserProfile,
   getCurrentUserTopArtists,
   getCurrentUserTopTracks,
   getRecentlyPlayed
-} from "../spotify";
-import { StyledHeader, StyledTrackList } from "../styles";
-import {
-  SectionWrapper,
-  ArtistsGrid,
-  TrackList,
-  PlaylistsGrid,
-  Loader,
-  TrackItem
-} from "../components";
+} from '../spotify'
+import { StyledHeader, StyledTrackList } from '../styles'
+import { catchErrors } from '../util'
 
 
 
 const Profile = () => {
-  const [profile, setProfile] = useState(null);
-  const [playlists, setPlaylists] = useState(null);
-  const [topArtists, setTopArtists] = useState(null);
-  const [topTracks, setTopTracks] = useState(null);
-  const [recentlyPlayed, setRecentlyPlayed] = useState(null);
+  const [profile, setProfile] = useState()
+  const [playlists, setPlaylists] = useState()
+  const [topArtists, setTopArtists] = useState()
+  const [topTracks, setTopTracks] = useState()
+  const [recentlyPlayed, setRecentlyPlayed] = useState()
 
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log(`fetching data`);
+      console.log('fetching data')
 
-      const userProfile = await getCurrentUserProfile();
-      console.log(`userProfile: ${userProfile.data}`);
-      setProfile(userProfile.data);
+      const userProfile = await getCurrentUserProfile()
+      console.log(`userProfile: ${userProfile.data}`)
+      setProfile(userProfile.data)
 
-      const userPlaylists = await getCurrentUserPlaylists();
-      setPlaylists(userPlaylists.data);
-      console.log(`userPlaylists: ${userPlaylists.data}`);
+      const userPlaylists = await getCurrentUserPlaylists()
+      setPlaylists(userPlaylists.data)
+      console.log(`userPlaylists: ${userPlaylists.data}`)
 
-      const topArtists = await getCurrentUserTopArtists();
-      setTopArtists(topArtists.data);
-      console.log(`topArtists: ${topArtists}`);
+      const topArtists = await getCurrentUserTopArtists()
+      setTopArtists(topArtists.data)
+      console.log(`topArtists: ${topArtists}`)
 
-      const userRecentlyPlayed = await getRecentlyPlayed();
-      setRecentlyPlayed(userRecentlyPlayed.data);
+      const userRecentlyPlayed = await getRecentlyPlayed()
+      setRecentlyPlayed(userRecentlyPlayed.data)
       // console.log(userRecentlyPlayed.data.items.slice(0, 10));
       // setRecentlyPlayed(topArtists.data);
-      console.log(`recentlyPlayed: ${userRecentlyPlayed}`);
+      console.log(`recentlyPlayed: ${userRecentlyPlayed}`)
 
-      const topTracks = await getCurrentUserTopTracks();
-      setTopTracks(topTracks.data);
-      console.log(`topTracks: ${topTracks}`);
+      const topTracks = await getCurrentUserTopTracks()
+      setTopTracks(topTracks.data)
+      console.log(`topTracks: ${topTracks}`)
 
       // catchErrors(fetchData());
-      console.log(`finished fetching data`);
-    };
+      console.log('finished fetching data')
+    }
 
-    catchErrors(fetchData());
-  }, []);
+    catchErrors(fetchData())
+  }, [])
 
   return (
     <div>
@@ -66,7 +66,7 @@ const Profile = () => {
         <div>
           <StyledHeader type="user">
             <div className="header__inner">
-              {profile.images.length && profile.images[0].url && (
+              {profile.images && profile.images.length > 0 && profile.images[0].url && (
                 <p>
                   <img
                     className="header__img"
@@ -82,12 +82,12 @@ const Profile = () => {
                   {playlists && (
                     <span>
                       {playlists.total} Playlist
-                      {playlists.total !== 1 ? "s" : ""}
+                      {playlists.total === 1 ? '' : 's'}
                     </span>
                   )}
                   <span>
                     {profile.followers.total} Follower
-                    {profile.followers.total !== 1 ? "s" : ""}
+                    {profile.followers.total === 1 ? '' : 's'}
                   </span>
                 </p>
               </div>
@@ -108,7 +108,7 @@ const Profile = () => {
               {/* {recentlyPlayed ? (<TrackList tracks={recentlyPlayed.data.items.slice(0, 10)} />) : (<Loader />)} */}
               {recentlyPlayed ? (
                 <StyledTrackList>
-                  {recentlyPlayed.items.slice(0, 10).map(({ track }, i) => (<TrackItem track={track} key={i} />))}
+                  {recentlyPlayed.items.slice(0, 10).map(({ track }, index) => (<TrackItem track={track} key={index} />))}
                 </StyledTrackList>) : (<Loader />)}
             </SectionWrapper>
 
@@ -119,7 +119,7 @@ const Profile = () => {
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile
