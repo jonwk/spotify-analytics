@@ -5,7 +5,7 @@ declare global {
       CLIENT_ID: string
       FRONTEND_URI: string
       REDIRECT_URI: string
-      PORT?: number
+      PORT?: string
     }
   }
 }

@@ -1,17 +1,14 @@
 {
   "name": "server",
-  "type": "module",
   "scripts": {
-    "dev": "tsx watch src/index.ts"
+    "dev": "bun run --hot src/index.ts"
   },
   "dependencies": {
     "@hono/eslint-config": "^1.0.2",
-    "@hono/node-server": "^1.13.7",
     "dotenv": "^16.4.7",
-    "hono": "^4.6.12"
+    "hono": "^4.6.13"
   },
   "devDependencies": {
-    "@types/node": "^20.17.9",
-    "tsx": "^4.7.1"
+    "@types/bun": "latest"
   }
 }
