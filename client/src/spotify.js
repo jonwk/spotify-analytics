@@ -97,7 +97,6 @@ const getAccessToken = () => {
     [LOCALSTORAGE_KEYS.refresh_token]: getCookie('refresh_token'),
     [LOCALSTORAGE_KEYS.expire_time]: getCookie('expire_time'),
   }
-  console.log('getAccessToken', queryParameters)
 
   const hasError = urlParameters.get('error')
 
