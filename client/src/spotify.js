@@ -79,14 +79,16 @@ const getCookie = (name) => {
 }
 
 const clearCookies = () => {
-  // eslint-disable-next-line unicorn/no-document-cookie
   const cookies = document.cookie.split(';')
+  
   cookies.forEach(cookie => {
-    const name = cookie.split('=')[0].trim()
+    const [name] = cookie.split('=').map(c => c.trim())
+    
     // eslint-disable-next-line unicorn/no-document-cookie
-    document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`
+    document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure`
   })
 }
+
 
 const getAccessToken = () => {
   const queryString = globalThis.location.search
@@ -101,19 +103,12 @@ const getAccessToken = () => {
   const hasError = urlParameters.get('error')
 
   // If there's an error OR the token in localStorage has expired, refresh the token
-  if (
-    hasError ||
-    hasTokenExpired() ||
-    LOCALSTORAGE_VALUES.access_token === 'undefined'
-  ) {
+  if (hasError || hasTokenExpired() || LOCALSTORAGE_VALUES.access_token === 'undefined') {
     refreshToken()
   }
 
   // If there is a valid access token in localStorage, use that
-  if (
-    LOCALSTORAGE_VALUES.access_token &&
-    LOCALSTORAGE_VALUES.access_token !== 'undefined'
-  ) {
+  if (LOCALSTORAGE_VALUES.access_token && LOCALSTORAGE_VALUES.access_token !== 'undefined') {
     return LOCALSTORAGE_VALUES.access_token
   }
 
