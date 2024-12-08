@@ -46,6 +46,11 @@ const App = () => {
     setToken(access_token)
   }, [])
 
+  const handleLogout = () => {
+    logout()
+    setToken(undefined)
+  }
+
   return (
     <div className="App">
       <GlobalStyle />
@@ -53,7 +58,7 @@ const App = () => {
       <header className="App-header">
         {token ? (
           <div>
-            <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
+            <StyledLogoutButton onClick={handleLogout}>Log Out</StyledLogoutButton>
             <Router>
               <ScrollToTop />
 
