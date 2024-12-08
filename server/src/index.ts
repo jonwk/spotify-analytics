@@ -3,8 +3,8 @@ import { setCookie } from 'hono/cookie'
 import { serveStatic } from 'hono/bun'
 import { Buffer } from 'buffer'
 import { URLSearchParams } from 'url'
-import 'dotenv/config'
 import { resolve } from "path"
+import 'dotenv/config'
 
 const config = {
   CLIENT_ID: process.env.CLIENT_ID,
