@@ -20,7 +20,7 @@ if (!config.CLIENT_ID || !config.CLIENT_SECRET || !config.REDIRECT_URI || !confi
 
 const app = new Hono()
 
-app.use('/static/*', serveStatic({ root: '../../client/build' }))
+app.use('/static/*', serveStatic({ root: '../../client/public' }))
 
 // Helper function to generate random string for state
 function generateState(length: number): string {
