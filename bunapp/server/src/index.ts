@@ -2,23 +2,23 @@ import { Hono } from 'hono'
 import { setCookie } from 'hono/cookie'
 import { serveStatic } from 'hono/bun'
 import { Buffer } from 'buffer'
-import { readFile } from 'fs/promises'
-import path from 'path'
 import { URLSearchParams } from 'url'
 import 'dotenv/config'
+import { resolve } from "path"
 
-const CLIENT_SECRET = process.env.CLIENT_SECRET
-const CLIENT_ID = process.env.CLIENT_ID
-const REDIRECT_URI = process.env.REDIRECT_URI
-const FRONTEND_URI = process.env.FRONTEND_URI
-const PORT = process.env.PORT || 8888
+const config = {
+  CLIENT_ID: process.env.CLIENT_ID,
+  CLIENT_SECRET: process.env.CLIENT_SECRET,
+  REDIRECT_URI: process.env.REDIRECT_URI,
+  FRONTEND_URI: process.env.FRONTEND_URI,
+  PORT: parseInt(process.env.PORT || '8888', 10),
+}
+
+if (!config.CLIENT_ID || !config.CLIENT_SECRET || !config.REDIRECT_URI || !config.FRONTEND_URI) {
+  throw new Error('Missing required environment variables.')
+}
 
 const app = new Hono()
-
-app.get('/', (context) => {
-  console.log(`Hono app listening at http://localhost:${PORT}`)
-  return context.text(`Hono app listening at http://localhost:${PORT}`)
-})
 
 app.use('/static/*', serveStatic({ root: '../../client/build' }))
 
@@ -45,8 +45,8 @@ app.get('/login', (context) => {
 
   const paramsObj = {
     response_type: 'code',
-    client_id: CLIENT_ID,
-    redirect_uri: REDIRECT_URI,
+    client_id: config.CLIENT_ID,
+    redirect_uri: config.REDIRECT_URI,
     state: state,
     scope: scope
   }
@@ -66,18 +66,18 @@ app.get('/callback', async (context) => {
   }
 
   const grantType = 'authorization_code'
+
   const data = new URLSearchParams({
     grant_type: grantType,
     code: code,
-    redirect_uri: REDIRECT_URI
+    redirect_uri: config.REDIRECT_URI
   }).toString()
 
   const postUrl = 'https://accounts.spotify.com/api/token'
   const contentType = 'application/x-www-form-urlencoded'
-  const authorization = `Basic ${Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64')}`
+  const authorization = `Basic ${Buffer.from(`${config.CLIENT_ID}:${config.CLIENT_SECRET}`).toString('base64')}`
 
   try {
-
     const response = await fetch(postUrl, {
       method: 'POST',
       headers: {
@@ -97,7 +97,7 @@ app.get('/callback', async (context) => {
         expires_in: expires_in.toString()
       }).toString()
 
-      return context.redirect(`${FRONTEND_URI}?${searchParams}`)
+      return context.redirect(`${config.FRONTEND_URI}?${searchParams}`)
     } else {
       return context.redirect(
         `/?${new URLSearchParams({ error: 'invalid_token' }).toString()}`
@@ -110,9 +110,9 @@ app.get('/callback', async (context) => {
 
 // Catch-all route to serve the React app
 app.get('*', async (context) => {
-  const indexFilePath = path.resolve('../../client/build', 'index.html')
+  const indexFilePath = resolve('../../client/build', 'index.html')
   try {
-    const content = await readFile(indexFilePath, 'utf-8')
+    const content = await Bun.file(indexFilePath).text()
     return context.html(content)
   } catch (error: any) {
     return context.text(`Index file not found. Error: ${error.message}`, 404)
@@ -120,8 +120,8 @@ app.get('*', async (context) => {
 })
 
 export default {
-  port: PORT,
+  port: config.PORT,
   fetch: app.fetch,
-} 
+}
 
-console.log(`Hono-Bun app listening at http://localhost:${PORT}`)
+console.log(`Hono-Bun app listening at http://localhost:${config.PORT}`)
