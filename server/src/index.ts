@@ -32,7 +32,7 @@ function generateState(length: number): string {
 
 const stateKey = 'spotify_auth_state'
 
-app.get('/login', (context) => {
+app.get('/login', (context: any) => {
   const state = generateState(16)
   setCookie(context, stateKey, state)
 
@@ -56,7 +56,7 @@ app.get('/login', (context) => {
   return context.redirect(redirectUrl)
 })
 
-app.get('/callback', async (context) => {
+app.get('/callback', async (context: any) => {
   const code = context.req.query('code') || null
 
   if (!code) {
@@ -109,8 +109,8 @@ app.get('/callback', async (context) => {
 })
 
 // Catch-all route to serve the React app
-app.get('*', async (context) => {
-  const indexFilePath = resolve('../../client/build', 'index.html')
+app.get('*', async (context: any) => {
+  const indexFilePath = resolve('../../client/public', 'index.html')
   try {
     const content = await Bun.file(indexFilePath).text()
     return context.html(content)
