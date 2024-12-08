@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 
 import { StyledTrackList } from '../styles'
 import { formatDuration } from '../util'
