@@ -1,8 +1,0 @@
-# deps
-node_modules/
-
-# env
-.env
-.env.*
-
-.vscode/*
