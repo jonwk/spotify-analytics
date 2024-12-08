@@ -66,30 +66,26 @@ const refreshToken = async () => {
   }
 }
 
-/**
- * Clear out all localStorage items we've set and reload the page
- * @returns {void}
- */
-export const logout = () => {
-  // Clear all localStorage items
-  for (const property in LOCALSTORAGE_KEYS) {
-    globalThis.localStorage.removeItem(LOCALSTORAGE_KEYS[property])
-  }
-  // Navigate to homepage
-  globalThis.location = globalThis.location.origin
+const getCookie = (name) => {
+  return document.cookie.split(';').find((cookie) => cookie.includes(name)).trim().split('=')[1]
+}
+
+const clearCookie = (name) => {
+  // eslint-disable-next-line unicorn/no-document-cookie
+  document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`
 }
 
 const getAccessToken = () => {
   const queryString = globalThis.location.search
-  // window.loca tion.search - everyting after localhost:port/
-
   const urlParameters = new URLSearchParams(queryString)
-  //   const access_token = urlParams.get("access_token");
+
   const queryParameters = {
-    [LOCALSTORAGE_KEYS.access_token]: urlParameters.get('access_token'),
-    [LOCALSTORAGE_KEYS.refresh_token]: urlParameters.get('refresh_token'),
-    [LOCALSTORAGE_KEYS.expire_time]: urlParameters.get('expire_time'),
+    [LOCALSTORAGE_KEYS.access_token]: getCookie('access_token'),
+    [LOCALSTORAGE_KEYS.refresh_token]: getCookie('refresh_token'),
+    [LOCALSTORAGE_KEYS.expire_time]: getCookie('expire_time'),
   }
+  console.log('getAccessToken', queryParameters)
+
   const hasError = urlParameters.get('error')
 
   // If there's an error OR the token in localStorage has expired, refresh the token
@@ -186,3 +182,18 @@ export const getPlaylistById = (playlist_id) => {
  */
 
 export const getRecentlyPlayed = () => axios.get('/me/player/recently-played')
+
+/**
+ * Clear out all localStorage items we've set and reload the page
+ * @returns {void}
+ */
+export const logout = () => {
+  // Clear all localStorage items
+  for (const property in LOCALSTORAGE_KEYS) {
+    globalThis.localStorage.removeItem(LOCALSTORAGE_KEYS[property])
+    clearCookie(property)
+  }
+  console.log('globalThis.localStorage', globalThis.localStorage)
+  // Navigate to homepage
+  globalThis.location = globalThis.location.origin
+}
