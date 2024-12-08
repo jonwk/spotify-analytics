@@ -41,6 +41,7 @@ const refreshToken = async () => {
     if (
       !LOCALSTORAGE_VALUES.refresh_token ||
       LOCALSTORAGE_VALUES.refresh_token === 'undefined' ||
+      !globalThis.localStorage.getItem(LOCALSTORAGE_KEYS.access_token) ||
       Date.now() - Number(LOCALSTORAGE_VALUES.timestamp) / 1000 < 1000
     ) {
       console.error('No refresh token available')
@@ -66,46 +67,48 @@ const refreshToken = async () => {
   }
 }
 
-/**
- * Clear out all localStorage items we've set and reload the page
- * @returns {void}
- */
-export const logout = () => {
-  // Clear all localStorage items
-  for (const property in LOCALSTORAGE_KEYS) {
-    globalThis.localStorage.removeItem(LOCALSTORAGE_KEYS[property])
+const getCookie = (name) => {
+  const cookies = document.cookie
+  if (cookies.split(';').length > 0) {
+    const result = cookies.split(';').find((cookie) => cookie.includes(name))
+    if (result) {
+      return result.trim().split('=')[1]
+    }
   }
-  // Navigate to homepage
-  globalThis.location = globalThis.location.origin
+  return
 }
+
+const clearCookies = () => {
+  const cookies = document.cookie.split(';')
+  
+  cookies.forEach(cookie => {
+    const [name] = cookie.split('=').map(c => c.trim())
+    
+    // eslint-disable-next-line unicorn/no-document-cookie
+    document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT; SameSite=None; Secure`
+  })
+}
+
 
 const getAccessToken = () => {
   const queryString = globalThis.location.search
-  // window.loca tion.search - everyting after localhost:port/
-
   const urlParameters = new URLSearchParams(queryString)
-  //   const access_token = urlParams.get("access_token");
+
   const queryParameters = {
-    [LOCALSTORAGE_KEYS.access_token]: urlParameters.get('access_token'),
-    [LOCALSTORAGE_KEYS.refresh_token]: urlParameters.get('refresh_token'),
-    [LOCALSTORAGE_KEYS.expire_time]: urlParameters.get('expire_time'),
+    [LOCALSTORAGE_KEYS.access_token]: getCookie('access_token'),
+    [LOCALSTORAGE_KEYS.refresh_token]: getCookie('refresh_token'),
+    [LOCALSTORAGE_KEYS.expire_time]: getCookie('expire_time'),
   }
+
   const hasError = urlParameters.get('error')
 
   // If there's an error OR the token in localStorage has expired, refresh the token
-  if (
-    hasError ||
-    hasTokenExpired() ||
-    LOCALSTORAGE_VALUES.access_token === 'undefined'
-  ) {
+  if (hasError || hasTokenExpired() || LOCALSTORAGE_VALUES.access_token === 'undefined') {
     refreshToken()
   }
 
   // If there is a valid access token in localStorage, use that
-  if (
-    LOCALSTORAGE_VALUES.access_token &&
-    LOCALSTORAGE_VALUES.access_token !== 'undefined'
-  ) {
+  if (LOCALSTORAGE_VALUES.access_token && LOCALSTORAGE_VALUES.access_token !== 'undefined') {
     return LOCALSTORAGE_VALUES.access_token
   }
 
@@ -186,3 +189,18 @@ export const getPlaylistById = (playlist_id) => {
  */
 
 export const getRecentlyPlayed = () => axios.get('/me/player/recently-played')
+
+/**
+ * Clear out all localStorage items we've set and reload the page
+ * @returns {void}
+ */
+export const logout = () => {
+  // Clear all localStorage items
+  for (const key in LOCALSTORAGE_KEYS) {
+    globalThis.localStorage.removeItem(LOCALSTORAGE_KEYS[key])
+  }
+  // Clear all cookies associated with auth
+  clearCookies()
+  // Redirect to login or homepage
+  globalThis.location.href = globalThis.location.origin
+}

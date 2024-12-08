@@ -1,5 +1,5 @@
 import { Hono } from 'hono'
-import { setCookie } from 'hono/cookie'
+import { setCookie, getCookie } from 'hono/cookie'
 import { serveStatic } from 'hono/bun'
 import { Buffer } from 'buffer'
 import { URLSearchParams } from 'url'
@@ -91,13 +91,12 @@ app.get('/callback', async (context: any) => {
       const responseData = await response.json()
       const { access_token, refresh_token, expires_in } = responseData
 
-      const searchParams = new URLSearchParams({
-        access_token,
-        refresh_token,
-        expires_in: expires_in.toString()
-      }).toString()
-
-      return context.redirect(`${config.FRONTEND_URI}?${searchParams}`)
+      setCookie(context, 'spotify_access_token', access_token, {
+        maxAge: expires_in
+      })
+      setCookie(context, 'spotify_refresh_token', refresh_token)
+      setCookie(context, 'expire_time', expires_in)
+      return context.redirect(config.FRONTEND_URI)
     } else {
       return context.redirect(
         `/?${new URLSearchParams({ error: 'invalid_token' }).toString()}`
@@ -107,6 +106,51 @@ app.get('/callback', async (context: any) => {
     return context.text(`Error: ${error.message}`, 500)
   }
 })
+
+app.get('/refresh_token', async (context) => {
+  const refresh_token = getCookie(context, 'spotify_refresh_token')
+
+  if (!refresh_token) {
+    return context.text('Refresh token missing', 400)
+  }
+
+  const data = new URLSearchParams({
+    grant_type: 'refresh_token',
+    refresh_token
+  }).toString()
+
+  const postUrl = 'https://accounts.spotify.com/api/token'
+  const authorization = `Basic ${Buffer.from(`${config.CLIENT_ID}:${config.CLIENT_SECRET}`).toString('base64')}`
+
+  try {
+    const response = await fetch(postUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        Authorization: authorization
+      },
+      body: data
+    })
+
+    if (response.ok) {
+      const { access_token, expires_in } = await response.json()
+
+      // Update access token cookie
+      setCookie(context, 'spotify_access_token', access_token, {
+        httpOnly: true,
+        secure: true,
+        maxAge: expires_in
+      })
+
+      return context.json({ success: true })
+    } else {
+      return context.text('Failed to refresh token', 400)
+    }
+  } catch (error: any) {
+    return context.text(`Error: ${error.message}`, 500)
+  }
+})
+
 
 // Catch-all route to serve the React app
 app.get('*', async (context: any) => {
