@@ -67,7 +67,14 @@ const refreshToken = async () => {
 }
 
 const getCookie = (name) => {
-  return document.cookie.split(';').find((cookie) => cookie.includes(name)).trim().split('=')[1]
+  const cookies = document.cookie
+  if (cookies.split(';').length > 0) {
+    const result = cookies.split(';').find((cookie) => cookie.includes(name))
+    if (result) {
+      return result.trim().split('=')[1]
+    }
+  }
+  return
 }
 
 const clearCookie = (name) => {
@@ -189,11 +196,12 @@ export const getRecentlyPlayed = () => axios.get('/me/player/recently-played')
  */
 export const logout = () => {
   // Clear all localStorage items
+  console.log('LOCALSTORAGE_KEYS', LOCALSTORAGE_KEYS)
   for (const property in LOCALSTORAGE_KEYS) {
     globalThis.localStorage.removeItem(LOCALSTORAGE_KEYS[property])
     clearCookie(property)
   }
-  console.log('globalThis.localStorage', globalThis.localStorage)
+  console.log('globalThis.location', globalThis.location)
   // Navigate to homepage
   globalThis.location = globalThis.location.origin
 }
