@@ -41,6 +41,7 @@ const refreshToken = async () => {
     if (
       !LOCALSTORAGE_VALUES.refresh_token ||
       LOCALSTORAGE_VALUES.refresh_token === 'undefined' ||
+      !globalThis.localStorage.getItem(LOCALSTORAGE_KEYS.access_token) ||
       Date.now() - Number(LOCALSTORAGE_VALUES.timestamp) / 1000 < 1000
     ) {
       console.error('No refresh token available')
@@ -77,9 +78,14 @@ const getCookie = (name) => {
   return
 }
 
-const clearCookie = (name) => {
+const clearCookies = () => {
   // eslint-disable-next-line unicorn/no-document-cookie
-  document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`
+  const cookies = document.cookie.split(';')
+  cookies.forEach(cookie => {
+    const name = cookie.split('=')[0].trim()
+    // eslint-disable-next-line unicorn/no-document-cookie
+    document.cookie = `${name}=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;`
+  })
 }
 
 const getAccessToken = () => {
@@ -196,12 +202,11 @@ export const getRecentlyPlayed = () => axios.get('/me/player/recently-played')
  */
 export const logout = () => {
   // Clear all localStorage items
-  console.log('LOCALSTORAGE_KEYS', LOCALSTORAGE_KEYS)
-  for (const property in LOCALSTORAGE_KEYS) {
-    globalThis.localStorage.removeItem(LOCALSTORAGE_KEYS[property])
-    clearCookie(property)
+  for (const key in LOCALSTORAGE_KEYS) {
+    globalThis.localStorage.removeItem(LOCALSTORAGE_KEYS[key])
   }
-  console.log('globalThis.location', globalThis.location)
-  // Navigate to homepage
-  globalThis.location = globalThis.location.origin
+  // Clear all cookies associated with auth
+  clearCookies()
+  // Redirect to login or homepage
+  globalThis.location.href = globalThis.location.origin
 }
