@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts"
+  },
+  "builds": [
+    {
+      "src": "src/index.ts", 
+      "use": "@vercel/node"
+    }
+  ],
+  "dependencies": {
+    "@hono/eslint-config": "^1.0.2",
+    "@hono/node-server": "^1.13.7",
+    "dotenv": "^16.4.7",
+    "hono": "^4.6.12"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.9",
+    "tsx": "^4.7.1"
+  }
+}
