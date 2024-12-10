@@ -1,6 +1,5 @@
 import React from 'react'
-
-import { StyledRangeButtons } from '../styles'
+import { StyledRangeButtons } from 'src/styles'
 
 const TimeRangeButtons = ({ activeRange, setActiveRange }) => {
     return (

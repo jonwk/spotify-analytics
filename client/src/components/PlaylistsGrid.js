@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-
-import { StyledGrid } from '../styles'
+import { StyledGrid } from 'src/styles'
 
 const PlaylistsGrid = ({ playlists }) => (
   <div>

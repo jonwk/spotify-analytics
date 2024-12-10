@@ -1,7 +1,6 @@
 
 import React from 'react'
-
-import { StyledGrid } from '../styles'
+import { StyledGrid } from 'src/styles'
 
 const ArtistsGrid = ({ artists }) => (
   <div>
