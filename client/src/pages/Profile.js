@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react'
-
+import { StyledHeader, StyledTrackList } from 'src/styles'
+import { catchErrors } from 'src/util'
 import {
   ArtistsGrid,
   Loader,
   PlaylistsGrid,
   SectionWrapper,
   TrackItem,
-  TrackList } from '../components'
+  TrackList
+} from 'src/components'
 import {
   getCurrentUserPlaylists,
   getCurrentUserProfile,
   getCurrentUserTopArtists,
   getCurrentUserTopTracks,
   getRecentlyPlayed
-} from '../spotify'
-import { StyledHeader, StyledTrackList } from '../styles'
-import { catchErrors } from '../util'
+} from 'src/spotify'
 
 
 
@@ -41,7 +41,7 @@ const Profile = () => {
 
       const userRecentlyPlayed = await getRecentlyPlayed()
       setRecentlyPlayed(userRecentlyPlayed.data)
-      
+
       const topTracks = await getCurrentUserTopTracks()
       setTopTracks(topTracks.data)
     }

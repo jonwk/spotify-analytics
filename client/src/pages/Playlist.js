@@ -1,11 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
-
-import { Loader, SectionWrapper, TrackList } from '../components'
-import { getPlaylistById } from '../spotify'
-import { StyledHeader } from '../styles'
-import { catchErrors } from '../util'
+import { Loader, SectionWrapper, TrackList } from 'src/components'
+import { getPlaylistById } from 'src/spotify'
+import { StyledHeader } from 'src/styles'
+import { catchErrors } from 'src/util'
 
 const Playlist = () => {
     const { id } = useParams()

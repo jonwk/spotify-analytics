@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
-
-import { Loader, SectionWrapper, TrackItem } from '../components'
-import { getRecentlyPlayed } from '../spotify'
-import { StyledTrackList } from '../styles'
-import { catchErrors } from '../util'
+import { Loader, SectionWrapper, TrackItem } from 'src/components'
+import { getRecentlyPlayed } from 'src/spotify'
+import { StyledTrackList } from 'src/styles'
+import { catchErrors } from 'src/util'
 
 
 const RecentlyPlayed = () => {

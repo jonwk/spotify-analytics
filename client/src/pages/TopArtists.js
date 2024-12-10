@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
-
-import { ArtistsGrid, Loader, SectionWrapper, TimeRangeButtons } from '../components'
-import { getCurrentUserTopArtists } from '../spotify'
-import { catchErrors } from '../util'
+import { ArtistsGrid, Loader, SectionWrapper, TimeRangeButtons } from 'src/components'
+import { getCurrentUserTopArtists } from 'src/spotify'
+import { catchErrors } from 'src/util'
 
 
 const TopArtists = () => {
