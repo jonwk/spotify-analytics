@@ -55,23 +55,25 @@
     "simple-import-sort/imports": [
       "error",
       {
-        "groups": [
-          [
-            "^react",
-            "^@?\\w"
-          ],
-          [
-            "^@?\\w"
-          ],
-          [
-            "^"
-          ],
-          [
-            "^src//"
-          ],
-          [
-            "^\\."
-          ]
+        "simple-import-sort/imports": [
+          "error",
+          {
+            "groups": [
+              [
+                "^react",
+                "^@?\\w"
+              ],
+              [
+                "^src/"
+              ],
+              [
+                "^\\."
+              ],
+              [
+                "^"
+              ]
+            ]
+          }
         ]
       }
     ],
