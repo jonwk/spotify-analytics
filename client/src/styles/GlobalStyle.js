@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components/macro'
-
 import fonts from './fonts'
 import variables from './variables'
 

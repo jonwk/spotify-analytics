@@ -7,10 +7,9 @@ import {
   useLocation,
 } from 'react-router-dom'
 import styled from 'styled-components/macro'
-
-import { Login, Playlist, Playlists, Profile, RecentlyPlayed, TopArtists, TopTracks } from './pages'
-import { access_token, logout } from './spotify'
-import { GlobalStyle } from './styles'
+import { Login, Playlist, Playlists, Profile, RecentlyPlayed, TopArtists, TopTracks } from 'src/pages'
+import { access_token, logout } from 'src/spotify'
+import { GlobalStyle } from 'src/styles'
 
 const ScrollToTop = () => {
   const { pathname } = useLocation()

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-
-import { Loader, PlaylistsGrid, SectionWrapper } from '../components'
-import { getCurrentUserPlaylists } from '../spotify'
-import { catchErrors } from '../util'
+import { Loader, PlaylistsGrid, SectionWrapper } from 'src/components'
+import { getCurrentUserPlaylists } from 'src/spotify'
+import { catchErrors } from 'src/util'
 
 const Playlists = () => {
     const [playlistsData, setPlaylistsData] = useState()

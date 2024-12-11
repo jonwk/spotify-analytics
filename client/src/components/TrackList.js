@@ -1,7 +1,6 @@
 import React from 'react'
-
-import { StyledTrackList } from '../styles'
-import { formatDuration } from '../util'
+import { StyledTrackList } from 'src/styles'
+import { formatDuration } from 'src/util'
 
 
 const TrackList = ({ tracks }) => (

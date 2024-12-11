@@ -1,8 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
-import { formatDuration } from '../util'
-
+import { formatDuration } from 'src/util'
 
 const TrackItem = ({ track }, key) => {
   return (
