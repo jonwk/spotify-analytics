@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { StyledHeader, StyledTrackList } from 'src/styles'
-import { catchErrors } from 'src/util'
 import {
   ArtistsGrid,
   Loader,
@@ -16,6 +14,8 @@ import {
   getCurrentUserTopTracks,
   getRecentlyPlayed
 } from 'src/spotify'
+import { StyledHeader, StyledTrackList } from 'src/styles'
+import { catchErrors } from 'src/util'
 
 
 

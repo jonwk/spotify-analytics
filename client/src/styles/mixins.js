@@ -1,5 +1,4 @@
 import { css } from 'styled-components/macro'
-
 import theme from './theme'
 const { colors, fontSizes } = theme
 
