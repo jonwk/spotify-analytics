@@ -24,7 +24,6 @@
   },
   "plugins": [
     "react",
-    "simple-import-sort",
     "eslint-plugin-flowtype"
   ],
   "root": true,
@@ -52,27 +51,14 @@
       "error",
       "always"
     ],
-    "simple-import-sort/imports": [
+    "padding-line-between-statements": [
       "error",
       {
-        "groups": [
-          [
-            "^react",
-            "^@?\\w"
-          ],
-          [
-            "^src/"
-          ],
-          [
-            "^\\."
-          ],
-          [
-            "^"
-          ]
-        ]
+        "blankLine": "never",
+        "prev": "import",
+        "next": "import"
       }
     ],
-    "simple-import-sort/exports": "error",
     "unicorn/filename-case": [
       "error",
       {
